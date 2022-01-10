@@ -21,14 +21,18 @@
                 <div class="form-floating">
                     <input type="password" class="form-control" id="logIn-password" placeholder="Password" required>
                     <label for="floatingPassword">Contraseña</label><br>
-                    <button id="entrar" type="submit" class="btn btn-primary">Entrar</button><br><br>
+                    <button id="entrar" type="submit" class="btn btn-secondary btn-block">Entrar</button><br>
+                    <button id="googleLogIn" type="button" class="btn btn-info btn-block">Entrar con Google</button><br>
+                    <button id="facebookLogIn" type="button" class="btn btn-primary btn-block">Entrar con Facebook</button><br>
                 </div>
               </form>
                 <div>
                     <p>¿Aún no tienes una cuenta? <br>
                         <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#signUpModal">Registrate</a></p>
                 </div>
-                <a href="#" id="logOut">Salir</a>
+                <li style="display: none;" class="logged-in">
+                  <a class="nav-link" href="#" id="logOut">Salir</a>
+                </li>
   <!-- Modal -->
               <div class="modal fade" id="signUpModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
