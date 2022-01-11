@@ -3,16 +3,17 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
+        <title>Fullfill</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="index.css">
         <!--Libreria de bootstrap-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/simplex/bootstrap.min.css">
     </head>
     <body>
-<!--Pantalla 1 LogIn / LogUp-->
-        <section><center>
+<!--Pantalla1: LogIn / LogUp / LogOut-->
+        <section id="pantalla1"><center>
           <h1>-Fullfill-</h1>
             <form class="container" id="logIn-Form">
                 <div class="form-floating">
@@ -31,9 +32,9 @@
                     <p>¿Aún no tienes una cuenta? <br>
                         <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#signUpModal">Registrate</a></p>
                 </div>
-                <li style="display: none;" class="logged-in">
+                <!-- <li style="display: none;" class="logged-in">
                   <a class="nav-link" href="#" id="logOut">Salir</a>
-                </li>
+                </li> -->
   <!-- Modal -->
               <div class="modal fade" id="signUpModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -55,9 +56,34 @@
                     </div>
                   </div>
                 </div>
-                
               </center></section>
 
+<!--Pantalla2: Main content-->
+              <section id="pantalla2" class="container p-4" hidden>
+<!--Formulario de propósitos a cumplir-->
+                <form id="task-form">
+                  <label for="exampleDataList" class="form-label">Tema: </label><br>
+                  <input class="form-control" list="temario" id="tema" placeholder="Selecciona un tema" required>
+                    <datalist id="temario"></datalist><br>
+                  <label for="title" class="form-label">Titulo: </label><br>
+                    <input type="text" id="title" placeholder="Objetivo a alcanzar" required><br><br>
+                  <label for="description" class="form-label">Descripción: </label><br>
+                    <input type="text" id="description" placeholder="Escribe una descripción acerca de tu objetivo a cumplir, así como algunas sugerencias para lograrlo"><br><br>
+                  <label for="exampleDataList2" class="form-label">Mes objetivo de consecución: </label><br>
+                  <input class="form-control" list="month" id="mes" placeholder="Selecciona un mes" required>
+                    <datalist id="month"></datalist>
+              </form>
+<!--Link para salir de la App-->
+              <li style="display: none;" class="logged-in">
+                <a class="nav-link" href="#" id="logOut">Salir</a>
+              </li>
+                <!-- <div class="row">
+                  <div class="col-md-6 offset-md-3">
+                    <ul class="list-group post">
+                    </ul>
+                  </div>
+                </div> -->
+              </section>
 <!--BoostrapsScripts-->
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
@@ -69,7 +95,7 @@
           https://firebase.google.com/docs/web/setup#available-libraries-->
           <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-auth.js"></script>
           <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js"></script>
-        <script>
+          <script>
           // Your web app's Firebase configuration
           // For Firebase JS SDK v7.20.0 and later, measurementId is optional
           const firebaseConfig = {

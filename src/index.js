@@ -88,7 +88,7 @@ logout.addEventListener('click', (e) => {
 })
 
 // //Post, ejemplos de elementos que se pueden monstrar despues de ser logueado
-// const postList = document.querySelector('post');
+// const postList = document.querySelector('.post');
 // const setupPosts = data => { //data desde firestore
 //     if (data.lenght) { //si contiene datos se itera
 //         let html = ``; //preparando para imprimir en html
@@ -109,14 +109,21 @@ logout.addEventListener('click', (e) => {
 //     }
 // }
 
+//Iterar datos de JSON para el formulario
+import {registroProposito} from "./data.js"
+registroProposito();
 
 //Autentificado
 auth.onAuthStateChanged(user => {
     if (user) {
         console.log('Auth: signin');
         loginCheck(user); //Aparece la opción de salir al estar iniciado
+        document.getElementById('pantalla2').hidden = false;
+        document.getElementById('pantalla1').hidden = true;
     } else {
         console.log('Auth: signout');
         loginCheck(user); //Desaparece la opción de salir si está afuera
+        document.getElementById('pantalla2').hidden = true;
+        document.getElementById('pantalla1').hidden = false;
     }
 })
