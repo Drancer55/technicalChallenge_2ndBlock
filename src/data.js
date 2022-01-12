@@ -8,12 +8,12 @@ export const registroProposito = () => {
     .then((response) => response.json())
     .then((data) => {
         objetivoArr.push(data)
-        console.log(objetivoArr);
+        //console.log(objetivoArr);
 //Iterando temática
         for (const theme of objetivoArr[0].Propositos.Tema) {
-            console.log(theme);
+            //console.log(theme);
             temaArr.push(theme)
-            console.log(temaArr);
+            //console.log(temaArr);
 //Imprimiendo temática
             const printTheme = document.querySelector('#temario')
             printTheme.innerHTML += `
@@ -21,9 +21,9 @@ export const registroProposito = () => {
 
         }
         for (const mes of objetivoArr[0].Propositos["Mes objetivo"]) {
-            console.log(mes);
+            //console.log(mes);
             mesObjArr.push(mes)
-            console.log(mesObjArr);
+            //console.log(mesObjArr);
 //Imprimiendo mes
             const printTheme = document.querySelector('#month')
             printTheme.innerHTML += `

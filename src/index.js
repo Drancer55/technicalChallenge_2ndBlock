@@ -9,25 +9,24 @@ const loginCheck = user => {
         loggedInLinks.forEach(link => link.style.display = 'none');
         // loggedOutLinks.forEach(link => link.style.display = 'block');
     }
-}
+};
 //SignUp
-const signupForm = document.querySelector('#signUp-form')
-const myModal = document.querySelector('#signUpModal')
+const signupForm = document.querySelector('#signUp-form');
+const myModal = document.querySelector('#signUpModal');
 
-signupForm.addEventListener('submit', (e) => {
+signupForm.addEventListener('submit', e => {
     e.preventDefault();
     const email = document.querySelector('#signUp-email').value;
     const password = document.querySelector('#signUp-password').value;
     auth
         .createUserWithEmailAndPassword(email, password)
-  .then(userCredential => {
+    .then(userCredential => {
     //clear the form
     signupForm.reset();
     //close the modal
-    myModal.hide();
+    //myModal.hide();
     //aviso de registro exitoso
-    alert('Registro exitoso');
-    
+    alert('Registro exitoso, bienvenido');
     });
 });
 
@@ -76,7 +75,7 @@ facebookButton.addEventListener('click', e => {
     .catch(err => {
         console.log(err);
     })
-})
+});
 
 //LogOut
 const logout = document.querySelector('#logOut')
@@ -85,7 +84,7 @@ logout.addEventListener('click', (e) => {
     auth.signOut().then(() => {
         console.log('signOut')
     })
-})
+});
 
 // //Post, ejemplos de elementos que se pueden monstrar despues de ser logueado
 // const postList = document.querySelector('.post');
@@ -127,3 +126,118 @@ auth.onAuthStateChanged(user => {
         document.getElementById('pantalla1').hidden = false;
     }
 })
+
+//Conexión con Firestore(base de datos)
+const db = firebase.firestore();
+console.log('database: ', db);
+//Determinando datos que se suben a la nube
+const taskForm = document.getElementById('task-form');
+const taskContainer = document.getElementById('task-container');
+
+let editStatus = false;
+let id = '';
+const guardarProposito = (tema, titulo, descripcion, mes) => 
+    db.collection('propositoNuevo').doc().set({
+        tema,
+        titulo,
+        descripcion,
+        mes
+    });
+
+//Extrayendo datos de la nube
+const getData = () => db.collection('propositoNuevo').get();
+    console.log('collection: ', getData());
+const editGetData = (id) => db.collection('propositoNuevo').doc(id).get();
+
+const onGetData = (callback) => db.collection('propositoNuevo').onSnapshot(callback)
+
+const deleteData = id => db.collection('propositoNuevo').doc(id).delete();
+
+const upDate = (id, upDateTask) => db.collection('propositoNuevo').doc(id).upDate(upDate);
+
+//Al haber cargado el objeto window se trae los datos desde Firebase
+window.addEventListener('DOMContentLoaded', async (e) => {
+    console.log(e);
+//Se preparan las cards con los datos
+    onGetData((querySnapshot) => {
+        taskContainer.innerHTML = '';
+        querySnapshot.forEach(doc => {
+            console.log(doc.data());
+//Constante propósito para traerse cada tarjeta creada
+            const proposito = doc.data();
+            proposito.id = doc.id;
+            console.log(proposito);
+//Se pintan las cards con los datos
+            taskContainer.innerHTML += `
+            <div class="card card-body mt-2 border-primary">
+                <h3>${proposito.tema}</h3>
+                <h4>${proposito.titulo}</h4>
+                <p>${proposito.descripcion}</p><br>
+                <br>Objetivo para: ${proposito.mes}<br>
+                <div>
+                    <button class="btn btn-primary btn-delete" data-id="${proposito.id}">Borrar</button>
+                    <button class="btn btn-primary btn-edit" data-id="${proposito.id}">Editar</button>
+                </div>
+                </div>`
+//Creación de los botones de borrar y editar desde el UI
+                const btnDelete = document.querySelectorAll('.btn-delete')
+                //log(btnDelete)
+                btnDelete.forEach(btn => {
+                    btn.addEventListener('click', async (e) => {
+                        console.log('clickeado');
+                        console.log(e.target.dataset.id);
+                        await deleteData(e.target.dataset.id)
+                    })
+                })
+                const btnEdit = document.querySelectorAll('.btn-edit')
+                btnEdit.forEach(btn => {
+                    console.log('editando');
+                    console.log(e.target.dataset.id);
+                    btn.addEventListener('click', async (e) => {
+                        const doc = await editGetData(e.target.dataset.id);
+                        console.log(doc.data);
+                        const task = doc.data();
+
+                        editStatus = true; 
+                        id = doc.id;
+
+                        taskForm['tema'].value = task.tema;
+                        taskForm['title'].value = task.title;
+                        taskForm['description'].value = task.description;
+                        taskForm['mes'].value = task.mount;
+                        taskForm['btn-task-form'].innerText = 'Actualizar';
+                    })
+                })
+            });
+        })
+    });
+
+taskForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const tema = taskForm['tema'];
+    const titulo = taskForm['title'];
+    const descripcion = taskForm['description'];
+    const mes = taskForm['mes'];
+
+    if (!editStatus) {
+        await guardarProposito(tema.value, titulo.value, descripcion.value, mes.value)
+    } else {
+        await upDate(id, {
+            tema: tema.value,
+            titulo: title.value,
+            descripcion: descripcion.value,
+            mes: mes.value
+        })
+        editStatus = false;
+        id = '';
+        taskForm['btn-task-form'].innerText = 'Guardar';
+
+    }
+
+    await getData();
+    taskForm.reset();
+    tema.focus();
+    //console.log(tema, titulo, descripcion, mes);
+    // console.log("click en submit");
+});
+
