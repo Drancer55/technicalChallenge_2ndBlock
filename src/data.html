@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>-Fullfill-</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="data.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/simplex/bootstrap.min.css" integrity="sha384-FYrl2Nk72fpV6+l3Bymt1zZhnQFK75ipDqPXK0sOR0f/zeOSZ45/tKlsKucQyjSp" crossorigin="anonymous">
+        </head>
+    <body>
+        <section id="pantalla2" class="container p-3"><center>
+            <li class="logged-in">
+                <a class="nav-link" href="./index.html" id="logOut">Salir</a>
+            </li>
+<!--Formulario de propósitos a cumplir-->
+            <form id="task-form" class="form-group col-md-5">
+                <center><h2 class="card-title">Nuevo propósito</h2></center>
+
+                <label for="exampleDataList" class="form-label" autofocus>Tema: </label>
+                <input class="form-control mb-2" list="temario" id="tema" placeholder="Selecciona un tema" required>
+                <datalist id="temario"></datalist>
+
+                <label for="titulo" class="form-label">Titulo: </label>
+                <input type="text" class="form-control mb-2" id="titulo" placeholder="Objetivo a alcanzar" required>
+
+                <label for="descripcion" class="form-label">Descripción: </label>
+                <textarea id="descripcion" class="form-control mb-2" placeholder="Escribe una descripción acerca de tu objetivo a cumplir, así como algunas sugerencias para lograrlo" rows="5" required></textarea>
+
+                <label for="exampleDataList2" class="form-label">Mes objetivo de logro: </label>
+                <input class="form-control mb-2" list="month" id="mes" placeholder="Selecciona un mes" required>
+                <datalist id="month"></datalist> <br>
+
+                <center><button class="btn btn-success" id="btn-task-save">Guardar</button></center>
+            </form>
+        </center></section>
+        <main><center>
+            <div id="task-container" class="col-md-5"></div>
+        </center></main>
+        <!--BoostrapsScripts-->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+
+        <script src="ui.js" type="module"></script>
+    </body>
+</html>

@@ -1,0 +1,110 @@
+@import url("https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Kaushan+Script&family=Lobster+Two&family=Pacifico&family=Pinyon+Script&display=swap");
+/* Fuentes utilizadas
+font-family: 'Fredericka the Great', cursive;
+font-family: 'Kaushan Script', cursive;
+font-family: 'Lobster Two', cursive;
+font-family: 'Pacifico', cursive;
+font-family: 'Pinyon Script', cursive; */
+body {
+  display: grid;
+  row-gap: 3px;
+  grid-template-columns: 2fr;
+  grid-template-rows: 2fr;
+  grid-template-areas:
+    "section main"
+    "section main";
+  background-image: url("../assets/image/bkgrnd2.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  height: 100vh;
+}
+
+li {
+  list-style: none;
+}
+
+.card-title {
+  font-family: "Lobster Two", cursive;
+  font-size: 2rem;
+  font-weight: bold;
+  text-shadow: 0px 0px 3px rgb(248, 215, 165);
+  margin-top: 1vh;
+}
+
+section {
+  grid-area: section;
+  font-weight: bolder;
+  width: 50vh;
+}
+
+form {
+  background-image: url("../assets/image/bkgrnd4.jpg");
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  border: solid 2px black;
+  margin: 0 auto;
+}
+
+main {
+  grid-area: main;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: inline-block;
+  width: auto;
+}
+
+.form-control {
+  font-family: "Pacifico", cursive;
+  font-weight: bold;
+}
+
+.form-label {
+  font-family: "Kaushan Script", cursive;
+  font-size: 1rem;
+}
+
+#btn-task-save {
+  font-family: "Fredericka the Great", cursive;
+  color: aliceblue;
+  font-size: 0.8rem;
+  margin-bottom: 2vh;
+}
+
+.h5 {
+  font-family: "Pacifico", cursive;
+  font-size: 10rem;
+  color: black;
+  font-weight: bolder;
+}
+.card-body {
+  width: -30vh;
+  background-image: url("../assets/image/bkgrnd1.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: solid 2px black;
+  width: 100%;
+}
+
+h2 {
+  font-family: "Fredericka the Great", cursive;
+  font-weight: bolder;
+}
+
+p.h6 {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-weight: bolder;
+  text-shadow: 0px 0px 1px black;
+}
+
+.modal-title {
+  font-family: "Fredericka the Great", cursive;
+}
+
+#signUpModal {
+  border: solid 1px rgba(82, 78, 78, 0.356);
+}
